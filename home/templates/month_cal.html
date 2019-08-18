@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST" action="{% url 'calculate'%}">
+{% csrf_token %}
+<p> ex) 7/2(화) 2시 02분 - 6시 35분</p>
+<textarea class="btn btn-outline-success" rows="15" cols="35" name="data" style="margin-bottom:10px;"></textarea><br>
+<a href="{% url 'home' %}" class="btn btn-outline-success">뒤로</a>
+<input type="submit" class="btn btn-outline-success" value="결과 계산">
+</form>
+
+
+
+{% endblock %}

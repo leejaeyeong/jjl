@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="width: 40%; margin-left: 45%;">
+    <form id="form" method="POST" action="{% url 'insertTime'%}">
+    {% csrf_token %} 
+    <div style=" text-align:left;">
+    날짜 선택 :<br>
+    <input class="btn btn-outline-primary" type="date" id="date" name="date" style="margin-bottom:1%;"><br> 
+    시간 선택 :<br>
+    <input class="btn btn-outline-primary" type='time' name="startTime" value='10:00'style="margin-bottom:1%;"/><br>
+    <input class="btn btn-outline-primary" type='time' name="endTime" value='14:00' style="margin-bottom:4%;"/><br>
+    <a href="{% url 'home' %}" class="btn btn-outline-primary">뒤로</a>
+    <input class="btn btn-outline-primary" type="submit" value="입력하기"/>
+    </div>
+    
+</form>
+</div>
+
+<script>
+    var today = new Date();
+    today.setDate(today.getDate());
+    document.getElementById('date').valueAsDate = today;
+</script>
+
+{% endblock %}

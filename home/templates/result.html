@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>오 ㅊㅋㅊㅋ 이번 달</h2>
+<h4>{{h_result}}시간 {{m_result}}분 입니당 </h4>
+<h4> 월급은 {{ pay }}원 ^^ <h4> 
+<a href="{% url 'total' %}" class="btn btn-outline-success">뒤로</a>
+<a href="{% url 'home' %}" class="btn btn-outline-success">홈으로</a>
+{% endblock %}
