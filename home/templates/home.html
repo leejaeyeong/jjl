@@ -22,5 +22,10 @@
         슈팅스타 x
     </div>
 </div>
-
+<script>
+var http = require("http");
+setInterval(function() {
+    http.get("http://jljy.herokuapp.com");
+}, 1740000); // every 29 minutes (1740000)
+</script>
 {% endblock %}
