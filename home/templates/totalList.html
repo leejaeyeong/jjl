@@ -4,8 +4,9 @@
 <div style="width:100%; text-align:center;">
 
 <h4>이번 달 {{totalH}}시간 {{totalM}}분</h4>
+<h4>나의 시급은</h4>
 <h4></h4>
-<table class="table" style="width:60%; margin-left:20%; text-align:center;">
+<table class="table" style="width:90%; margin-left:5%; text-align:center;">
   <thead class="thead-light">
     <tr>
       
@@ -22,11 +23,11 @@
     {% for homes in homes.all %}
     <tr>
       <!--- <td scope="row">{{ forloop.counter }}</td> --->
-      <td>{{ homes.date|date:'Y-m-d' }}</td>
-      <td>{{ homes.date|date:'D' }}</td>
-      <td>{{ homes.startH|time:'H:i' }}</td>
-      <td>{{ homes.endH|time:'H:i' }}</td>
-      <td>{{ homes.hour }}시간 {{ homes.minute }}분</td>
+      <td><h4>{{ homes.date|date:'Y-m-d' }}</h4></td>
+      <td><h4>{{ homes.date|date:'D' }}</h4></td>
+      <td><h4>{{ homes.startH|time:'H:i' }}</h4></td>
+      <td><h4>{{ homes.endH|time:'H:i' }}</h4></td>
+      <td><h4>{{ homes.hour }}시간 {{ homes.minute }}분</h4></td>
       <td><a href="#" class="btn btn-outline-success">수정</a></td>
     </tr>
     {% endfor %}
