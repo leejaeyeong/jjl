@@ -10,6 +10,18 @@ def home(request) :
 def total(request) :
     return render(request,'month_cal.html')
 
+def totalList(request) :
+    totalH = 0
+    totalM = 0
+    homes = Home.objects.all()
+    for k in homes :
+        totalH = totalH + k.hour
+        totalM = totalM + k.minute
+    
+    totalH = totalH + totalM//60
+    totalM = totalM%60
+    return render(request,'totalList.html', {'homes': homes, 'totalH':totalH, 'totalM':totalM})
+
 def calculate(request) :
     data = request.POST['data']
     data = data.split('\r\n')
@@ -95,6 +107,6 @@ def insertTime(request) :
     print("이번달")
     print(totalH)
     print(totalM)
-    return render(request,'timeList.html', {'homes': homes, 'totalH': totalH, 'totalM': totalM})
-
+    return render(request,'totalList.html', {'homes': homes, 'totalH': totalH, 'totalM': totalM})
+  
    

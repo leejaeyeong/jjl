@@ -20,8 +20,10 @@ import home.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home.views.home, name = "home"),
+    path('home/',home.views.home, name = "home"),
     path('calculate/', home.views.calculate , name="calculate"),
     path('total/', home.views.total , name ="total"),
     path('insert/', home.views.insert, name="insert"),
     path('insertTime/', home.views.insertTime, name="insertTime"),
+    path('totalList/',home.views.totalList, name="totalList")
 ]

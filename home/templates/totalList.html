@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="width:100%; text-align:center;">
+
+<h4>이번 달 {{totalH}}시간 {{totalM}}분</h4>
+<h4></h4>
+<table class="table" style="width:60%; margin-left:20%; text-align:center;">
+  <thead class="thead-light">
+    <tr>
+      
+      <th scope="col">날짜</th>
+      <th scope="col">요일</th>
+      <th scope="col">근무 시작</th>
+      <th scope="col">근무 종료</th>
+      <th scope="col">근무 시간</th>
+      <th scope="col">수정</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    {% for homes in homes.all %}
+    <tr>
+      <!--- <td scope="row">{{ forloop.counter }}</td> --->
+      <td>{{ homes.date|date:'Y-m-d' }}</td>
+      <td>{{ homes.date|date:'D' }}</td>
+      <td>{{ homes.startH|time:'H:i' }}</td>
+      <td>{{ homes.endH|time:'H:i' }}</td>
+      <td>{{ homes.hour }}시간 {{ homes.minute }}분</td>
+      <td><a href="#" class="btn btn-outline-success">수정</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
