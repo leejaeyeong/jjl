@@ -28,7 +28,7 @@
       <td><h4>{{ homes.startH|time:'H:i' }}</h4></td>
       <td><h4>{{ homes.endH|time:'H:i' }}</h4></td>
       <td><h4>{{ homes.hour }}시간 {{ homes.minute }}분</h4></td>
-      <td><a href="#" class="btn btn-outline-success">수정</a></td>
+      <td><a href="{% url 'modify' homes.id %}" class="btn btn-outline-success">수정</a></td>
     </tr>
     {% endfor %}
   </tbody>

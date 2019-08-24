@@ -108,5 +108,55 @@ def insertTime(request) :
     print(totalH)
     print(totalM)
     return render(request,'totalList.html', {'homes': homes, 'totalH': totalH, 'totalM': totalM})
+
+
+def modify(request,home_id) :
+    home = Home.objects.filter(id=home_id)
+    return render(request,'modify.html', {'home' : home})
   
-   
+def modifyapplication(request,home_id) :
+    date = request.POST['date']
+    stT = request.POST['startTime']
+    edT = request.POST['endTime']
+    
+    home = Home.objects.filter(id=home_id)
+    stT = stT + ":00"
+    edT = edT + ":00"
+    home.startH = stT
+    home.endH = edT
+    stT = stT.split(':')
+    edT = edT.split(':')
+
+    startH = int(stT[0])
+    endH = int(edT[0])
+    startM = int(stT[1])
+    endM = int(edT[1])
+
+    if startH > endH :
+        endH = endH + 24 
+    Hour = endH - startH
+
+    if startM > endM :
+        Hour = Hour - 1
+        endM = endM + 60
+    Minute = endM - startM
+
+    home.update(hour = int(Hour))
+    home.update(minute = int(Minute))
+    home.update(date = date)
+
+    homes = Home.objects
+    totalH = 0
+    totalM = 0
+    for k in Home.objects.all() :
+        totalH = totalH + k.hour
+        totalM = totalM + k.minute
+    
+    totalH = totalH + totalM//60
+    totalM = totalM%60
+    print("이번달")
+    print(totalH)
+    print(totalM)
+    return render(request,'totalList.html', {'homes': homes, 'totalH': totalH, 'totalM': totalM})
+    #return redirect('/totalList/')
+    
