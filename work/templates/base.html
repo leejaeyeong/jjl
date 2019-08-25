@@ -1,5 +1,9 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
 <html>
     <head>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
 <body style="text-align: center;">
@@ -8,4 +12,11 @@
 {% endblock %}
 
 </body>
+
+<script>
+var http = require("http");
+setInterval(function() {
+    http.get("http://jljy.herokuapp.com");
+}, 1740000); // every 29 minutes (1740000)
+</script>
 </html>

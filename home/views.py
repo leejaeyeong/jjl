@@ -2,6 +2,7 @@ from django.shortcuts import render
 import sys
 from .models import Home
 from django.utils import timezone
+import datetime
 # Create your views here.
 
 def home(request) :
@@ -11,9 +12,10 @@ def total(request) :
     return render(request,'month_cal.html')
 
 def totalList(request) :
+    dt = datetime.datetime.now()
     totalH = 0
     totalM = 0
-    homes = Home.objects.all()
+    homes = Home.objects.all().order_by('date').filter(date__month=dt.month)
     for k in homes :
         totalH = totalH + k.hour
         totalM = totalM + k.minute
@@ -95,7 +97,7 @@ def insertTime(request) :
     home.date = date
     home.save()
 
-    homes = Home.objects
+    homes = Home.objects.order_by('date')
     totalH = 0
     totalM = 0
     for k in Home.objects.all() :
@@ -145,7 +147,7 @@ def modifyapplication(request,home_id) :
     home.update(minute = int(Minute))
     home.update(date = date)
 
-    homes = Home.objects
+    homes = Home.objects.order_by('date')
     totalH = 0
     totalM = 0
     for k in Home.objects.all() :

@@ -12,7 +12,7 @@
     <h5 style="text-align:center;">시간 선택 :</h5>
     <input class="btn btn-outline-primary" type='time' name="startTime" value={{ home.startH|time:'H:i' }}  style="margin-bottom:1%; margin-left:20%; height:12%; width:60%;"/><br>
     <input class="btn btn-outline-primary" type='time' name="endTime" value={{ home.endH|time:'H:i' }}  style="margin-bottom:8%; margin-left:20%; height:12%; width:60%;"/><br>
-    <a href="{% url 'home' %}" class="btn btn-outline-primary" style="margin-left:20%; width:20%;">뒤로</a>
+    <a href="{% url 'totalList' %}" class="btn btn-outline-primary" style="margin-left:20%; width:20%;">뒤로</a>
     <input class="btn btn-outline-primary" type="submit" value="입력하기" style="width:40%;"/>
     </div>
     </form>
