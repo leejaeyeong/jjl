@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 {% load staticfiles %}
 
 <html>
@@ -12,11 +11,12 @@
 {% endblock %}
 
 </body>
-
 <script>
 var http = require("http");
 setInterval(function() {
     http.get("http://jljy.herokuapp.com");
 }, 1740000); // every 29 minutes (1740000)
 </script>
+
+
 </html>
