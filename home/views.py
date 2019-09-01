@@ -13,16 +13,36 @@ def total(request) :
 
 def totalList(request) :
     dt = datetime.datetime.now()
+    month = dt.month
     totalH = 0
     totalM = 0
-    homes = Home.objects.all().order_by('date').filter(date__month=dt.month)
+    #homes = Home.objects.all().order_by('date').filter(date__month=dt.month)
+    homes = Home.objects.all().order_by('date')
     for k in homes :
         totalH = totalH + k.hour
         totalM = totalM + k.minute
     
     totalH = totalH + totalM//60
     totalM = totalM%60
-    return render(request,'totalList.html', {'homes': homes, 'totalH':totalH, 'totalM':totalM})
+    return render(request,'totalList.html', {'homes': homes, 'totalH':totalH, 'totalM':totalM, 'month':month })
+
+def totalListMove(request, month) :
+    for i in range(10) :
+        print(month)
+    dt = datetime.datetime.now()
+    print(dt.month)
+    totalH = 0
+    totalM = 0
+    homes = Home.objects.all().order_by('date').filter(date__month=month-1)
+    for k in homes :
+        totalH = totalH + k.hour
+        totalM = totalM + k.minute
+    
+    totalH = totalH + totalM//60
+    totalM = totalM%60
+    
+    
+    return render(request,'totalList.html', {'homes': homes, 'totalH':totalH, 'totalM':totalM, 'month':month})
 
 def calculate(request) :
     data = request.POST['data']
@@ -66,6 +86,8 @@ def insert(request) :
     return render(request,'insert.html')
 
 def insertTime(request) :
+    dt = datetime.datetime.now()
+    month = dt.month
     date = request.POST['date']
     stT = request.POST['startTime']
     edT = request.POST['endTime']
@@ -109,14 +131,17 @@ def insertTime(request) :
     print("이번달")
     print(totalH)
     print(totalM)
-    return render(request,'totalList.html', {'homes': homes, 'totalH': totalH, 'totalM': totalM})
+    return render(request,'totalList.html', {'homes': homes, 'totalH': totalH, 'totalM': totalM, 'month':month})
 
 
 def modify(request,home_id) :
     home = Home.objects.filter(id=home_id)
     return render(request,'modify.html', {'home' : home})
   
+  
 def modifyapplication(request,home_id) :
+    dt = datetime.datetime.now()
+    month = dt.month
     date = request.POST['date']
     stT = request.POST['startTime']
     edT = request.POST['endTime']
@@ -159,6 +184,6 @@ def modifyapplication(request,home_id) :
     print("이번달")
     print(totalH)
     print(totalM)
-    return render(request,'totalList.html', {'homes': homes, 'totalH': totalH, 'totalM': totalM})
+    return render(request,'totalList.html', {'homes': homes, 'totalH': totalH, 'totalM': totalM, 'month':month})
     #return redirect('/totalList/')
     

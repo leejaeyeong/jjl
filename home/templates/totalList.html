@@ -2,10 +2,26 @@
 
 {% block content %}
 <div style="width:100%; text-align:center;">
-<input type="month" value='2019-08'><br>
+
 <h4>이번 달 총 근무 : {{totalH}}시간 {{totalM}}분</h4>
-<h4>이번 달 월급 : x원</h4>
-<h4></h4>
+<h4>이번 달 월급 : x원</h4><br>
+<!--- <input style="width:10%;"class="btn btn-outline-success" type="month" value='2019-08'> 
+<button style="border: 1px solid green; border-radius:.25rem; font-size:25px;color:green;border-color:green;background-color:transparent;">123123</button>
+--->
+
+<div class="box">                                                           
+        <div class="one">                                                   
+          <button class="btn btn-outline-success" style="margin-right:5%;" onclick="location.href={% url 'totalListMove' month  %}"> ◀ </button>
+          <!---<button class="btn btn-outline-success" style="margin-right:5%;" onclick="location.href={% url 'totalListMove' 9  %}"> ◀ </button>--->
+        </div>
+        <div class="two">
+          <h3 id="month" >9월</h3>
+        </div>
+        <div class="three">
+          <button class="btn btn-outline-success" style="margin-left:5%;"> ▶ </button>
+        </div>
+</div>
+
 <table class="table" style="width:90%; margin-left:5%; text-align:center;">
   <thead class="thead-light">
     <tr>
@@ -33,4 +49,7 @@
   </tbody>
 </table>
 
+<script>
+
+</script>
 {% endblock %}
