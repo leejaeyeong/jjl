@@ -3,6 +3,7 @@ import sys
 from .models import Home
 from django.utils import timezone
 import datetime
+import math
 # Create your views here.
 
 def home(request) :
@@ -12,37 +13,35 @@ def total(request) :
     return render(request,'month_cal.html')
 
 def totalList(request) :
-    dt = datetime.datetime.now()
-    month = dt.month
-    totalH = 0
-    totalM = 0
-    #homes = Home.objects.all().order_by('date').filter(date__month=dt.month)
-    homes = Home.objects.all().order_by('date')
-    for k in homes :
-        totalH = totalH + k.hour
-        totalM = totalM + k.minute
-    
-    totalH = totalH + totalM//60
-    totalM = totalM%60
-    return render(request,'totalList.html', {'homes': homes, 'totalH':totalH, 'totalM':totalM, 'month':month })
+    return throw(request)
 
-def totalListMove(request, month) :
-    for i in range(10) :
-        print(month)
-    dt = datetime.datetime.now()
-    print(dt.month)
+def throw(request) :
+    if request.method == 'POST':
+        if request.POST['state'] == "right" :
+            if request.POST['month'] == 12 :
+                month = 1
+            else : 
+                month = int(request.POST['month']) + 1
+        else :
+            if request.POST['month'] == 1 : 
+                month = 12 
+            else :
+                month = int(request.POST['month']) - 1
+    else : 
+        dt = datetime.datetime.now()
+        month = dt.month
+
     totalH = 0
     totalM = 0
-    homes = Home.objects.all().order_by('date').filter(date__month=month-1)
+    homes = Home.objects.all().order_by('date').filter(date__month=month)
+    #homes = Home.objects.all().order_by('date')
     for k in homes :
         totalH = totalH + k.hour
         totalM = totalM + k.minute
     
     totalH = totalH + totalM//60
     totalM = totalM%60
-    
-    
-    return render(request,'totalList.html', {'homes': homes, 'totalH':totalH, 'totalM':totalM, 'month':month})
+    return render(request,'totalList.html', {'homes': homes, 'totalH':totalH, 'totalM':totalM, 'month':month, 'salary': math.ceil(7770*(totalH+totalM/60))})
 
 def calculate(request) :
     data = request.POST['data']
@@ -119,19 +118,18 @@ def insertTime(request) :
     home.date = date
     home.save()
 
-    homes = Home.objects.order_by('date')
+    homes = Home.objects.order_by('date').filter(date__month=month)
     totalH = 0
     totalM = 0
-    for k in Home.objects.all() :
+    
+    for k in homes :
         totalH = totalH + k.hour
         totalM = totalM + k.minute
-    
+
     totalH = totalH + totalM//60
     totalM = totalM%60
-    print("이번달")
-    print(totalH)
-    print(totalM)
-    return render(request,'totalList.html', {'homes': homes, 'totalH': totalH, 'totalM': totalM, 'month':month})
+    
+    return render(request,'totalList.html', {'homes': homes, 'totalH': totalH, 'totalM': totalM, 'month':month, 'salary': math.ceil(7770*(totalH+totalM/60))})
 
 
 def modify(request,home_id) :
@@ -171,19 +169,16 @@ def modifyapplication(request,home_id) :
     home.update(hour = int(Hour))
     home.update(minute = int(Minute))
     home.update(date = date)
-
-    homes = Home.objects.order_by('date')
+    
+    homes = Home.objects.order_by('date').filter(date__month=month)
     totalH = 0
     totalM = 0
-    for k in Home.objects.all() :
+    for k in homes :
         totalH = totalH + k.hour
         totalM = totalM + k.minute
     
     totalH = totalH + totalM//60
     totalM = totalM%60
-    print("이번달")
-    print(totalH)
-    print(totalM)
-    return render(request,'totalList.html', {'homes': homes, 'totalH': totalH, 'totalM': totalM, 'month':month})
+    return render(request,'totalList.html', {'homes': homes, 'totalH': totalH, 'totalM': totalM, 'month':month, 'salary': math.ceil(7770*(totalH+totalM/60))})
     #return redirect('/totalList/')
     

@@ -26,7 +26,6 @@ urlpatterns = [
     path('insert/', home.views.insert, name="insert"),
     path('insertTime/', home.views.insertTime, name="insertTime"),
     path('totalList/',home.views.totalList, name="totalList"),
-    path('totalListMove/<int:month>',home.views.totalListMove, name="totalListMove"),
     path('modify/<int:home_id>',home.views.modify , name="modify"),
     path('modifyapplication/<int:home_id>',home.views.modifyapplication , name="modifyapplication"),
 ]
